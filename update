@@ -1,0 +1,87 @@
+
+
+//scan precise start point and end point
+for( x=startx,i=0; x<startx+5; x++,i++ )
+	for (y=starty-5; y<starty+5; y++)
+		{
+		if ( getpixel(x+i,y)==COLOR ) {startx=x+i; starty=y; return; }
+		if ( getpixel(x-i,y)==COLOR ) {startx=x; starty=y; return; }
+		}
+for( x=endx,i=0; x<endx+5; x++,i++ )
+	for (y=endy-5; y<endy+5; y++)
+		{
+		if ( getpixel(x+i,y)==COLOR ) {endx=x; endy=y; return; }
+		if ( getpixel(x-i,y)==COLOR ) {endx=x; endy=y; return; }
+		}
+
+
+
+
+
+
+
+struct s { startx, starty, endx ,endy, startDX, endDX } ss, * p;
+p=&ss;
+p->startDX=5;
+p->endDX=5;
+
+#define WR_BOTHUP_YG0( p , startx,starty,endx,endy) \
+
+#define WR_BOTHDN_YL0( p , startx,starty,endx,endy) \
+
+void func( int x, int y, struct s * p, int startx, int endx)
+{	
+	
+	//bothup direct=true||  y>=0
+	if ( startx-x <= temp ) {
+		p->startx=x;
+		p->starty=y;
+		temp=startx - x;
+		}
+	if ( x-endx < =temp){
+		p->endx=x;
+		p->endy=y;
+		temp=x - endx;
+		}
+
+	//bothdown  y<0
+	if ( x-startx < =temp ) {
+		p->startx=x;
+		p->starty=y;
+		temp=x-startx;
+		}
+	if ( endx-x < =temp){
+		p->endx=x;
+		p->endy=y;
+		temp=endx-x;
+		}
+//==================================================================================		
+	//against 
+	// direct=true  y>=0
+	if ( startx-x <= temp ) {
+		p->startx=x;
+		p->starty=y;
+		temp=startx - x;
+		}
+	// direct=true  y<0	
+	if ( endx-x <= temp){
+		p->endx=x;
+		p->endy=y;
+		temp=endx-x;
+		}
+
+	// direct=false  y<0
+	if ( x-startx <= temp ) {
+		p->startx=x;
+		p->starty=y;
+		temp=x-startx;
+		}
+
+	// direct=false  y>=0	
+	if ( x-endx <= temp){
+		p->endx=x;
+		p->endy=y;
+		temp=x-endx;
+		}
+}
+                                      
